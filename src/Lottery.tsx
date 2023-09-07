@@ -8,7 +8,7 @@ class Lottery extends Component<LottoProps, LottoState> {
   }
   state: LottoState = {
     nums: Array.from({ length: this.props.numBall }, () =>
-      Math.floor(Math.random() * this.props.maxNum),
+      Math.floor(Math.random() * this.props.maxNum + 1),
     ),
   };
 
@@ -31,7 +31,7 @@ class Lottery extends Component<LottoProps, LottoState> {
   getRand(prevState: LottoState) {
     return {
       nums: prevState.nums.map(() =>
-        Math.floor(Math.random() * this.props.maxNum),
+        Math.floor(Math.random() * this.props.maxNum + 1),
       ),
     };
   }
