@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import type { LottoProps, LottoState } from './Types';
+import type { LottoProps, LottoState } from './interfaces';
 import { LotteryBall } from './LotteryBall';
 
 class Lottery extends Component<LottoProps, LottoState> {
@@ -8,14 +8,14 @@ class Lottery extends Component<LottoProps, LottoState> {
   }
   state: LottoState = {
     nums: Array.from({ length: this.props.numBall }, () =>
-      Math.floor(Math.random() * this.props.maxNum + 1),
-    ),
+      Math.floor(Math.random() * this.props.maxNum + 1)
+    )
   };
 
   static defaultProps = {
     title: 'Lotto',
     numBalls: 6,
-    maxNum: 40,
+    maxNum: 40
   };
 
   // Alt way to generate nums
@@ -31,8 +31,8 @@ class Lottery extends Component<LottoProps, LottoState> {
   getRand(prevState: LottoState) {
     return {
       nums: prevState.nums.map(() =>
-        Math.floor(Math.random() * this.props.maxNum + 1),
-      ),
+        Math.floor(Math.random() * this.props.maxNum + 1)
+      )
     };
   }
 
@@ -43,21 +43,21 @@ class Lottery extends Component<LottoProps, LottoState> {
   render(): React.ReactNode {
     console.log(
       this.getBall().map(() => Math.floor(Math.random() * this.props.maxNum)),
-      'nums',
+      'nums'
     );
     return (
-      <div className="border-4 bg-red-600 flex flex-col items-center justify-center rounded-md border-black w-[500px] h-[300px]">
-        <h1 className="font-bold text-2xl uppercase mb-4 text-white">
+      <div className="flex h-[300px] w-[500px] flex-col items-center justify-center rounded-md border-4 border-black bg-red-600">
+        <h1 className="mb-4 text-2xl font-bold uppercase text-white">
           {this.props.title}
         </h1>
-        <main className="flex justify-around mb-5">
+        <main className="mb-5 flex justify-around">
           {this.state.nums.map((n: number, idx: number) => (
             <LotteryBall key={idx} num={n} />
           ))}
         </main>
         <button
           onClick={this.generateNum.bind(this)}
-          className="bg-blue-700 hover:duration-700 hover:ease-in-out hover:bg-amber-400 rounded-lg text-sm w-[80px] h-[30px] text-white"
+          className="h-[30px] w-[80px] rounded-lg bg-blue-700 text-sm text-white hover:bg-amber-400 hover:duration-700 hover:ease-in-out"
         >
           Generate
         </button>
